@@ -22,23 +22,14 @@ export default new Vuex.Store({
                 console.log(error);
             }
         },
-        setAlumno(payload){
-            // console.log(commit)
-            console.log(payload)
-            // try {
-            //     // const nuevoUsuario = {
-            //     //   nombre: payload.nombre,
-            //     //   email: payload.email,
-            //     //   pais: payload.pais,
-            //     //   cursos: payload.cursos    
-            //     // };
-            //     // commit('traerAlumnosRegistrados', respuestaAlumnos.data);
-            //     // await axios.post(`https://62df4289976ae7460be99a23.mockapi.io/alumnos`, payload);
-            //     // this.$router.push("login")
-            //   }
-            //   catch (error) {
-            //     console.log(error);
-            //   }
+        async setAlumno(context, payload){
+            try {
+                await axios.post(`https://62df4289976ae7460be99a23.mockapi.io/alumnos`, payload);
+                context.dispatch('getAlumnos');
+              }
+              catch (error) {
+                console.log(error);
+              }
         }
     }
 })

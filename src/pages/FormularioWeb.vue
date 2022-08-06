@@ -33,8 +33,8 @@
                 <select class="form-select" aria-label="Default select example" id="pais" name="pais" v-model.trim="model.pais" required>
                 <option selected disabled>Selecciona tu país de origen</option>
                 <option 
-                  v-for="paises in paises" 
-                  :key="paises.id" 
+                  v-for="(paises, index) in listaPaises" 
+                  :key="index" 
                   :value="paises.pais">
                     {{paises.pais}}
                 </option>
@@ -85,12 +85,10 @@
 </template>
 
 <script>
-import axios from 'axios'
 /* eslint-disable */
 export default {
   name: 'FormularioWeb',
   props: {
-    paises: Array
   },
   data(){
     return{
@@ -102,7 +100,81 @@ export default {
         pais:''
       },  
       validarCurso: false,
-      cursos: [],         
+      cursos: [],
+      listaPaises:[
+        {
+          id: 1,
+          pais: "Argentina"
+        },
+        {
+          id: 2,
+          pais: "Belice"
+        },
+        {
+          id: 3,
+          pais: "Bolivia"
+        },
+        {
+          id: 4,
+          pais: "Brasil"
+        },
+        {
+          id: 5,
+          pais: "Chile"
+        },
+        {
+          id: 6,
+          pais: "Colombia"
+        },
+        {
+          id: 7,
+          pais: "Costa Rica"
+        },
+        {
+          id: 8,
+          pais: "Ecuador"
+        },
+        {
+          id: 9,
+          pais: "El Salvador"
+        },
+        {
+          id: 10,
+          pais: "Guatemala"
+        },
+        {
+          id: 11,
+          pais: "Honduras"
+        },
+        {
+          id: 12,
+          pais: "México"
+        },
+        {
+          id: 13,
+          pais: "Nicaragua"
+        },
+        {
+          id: 14,
+          pais: "Panamá"
+        },
+        {
+          id: 15,
+          pais: "Paraguay"
+        },
+        {
+          id: 16,
+          pais: "Perú"
+        },
+        {
+          id: 17,
+          pais: "Uruguay"
+        },
+        {
+          id: 18,
+          pais: "Venezuela"
+        }
+      ]         
     }
   },
   methods:{
@@ -111,13 +183,14 @@ export default {
         return
       }else{
         var registro = {nombre: nombre.value, email: email.value, pais: pais.value, cursos: this.cursos.join(', ')}
-        try {
-            await axios.post(`https://62df4289976ae7460be99a23.mockapi.io/alumnos`, registro);
-          }
-          catch (error) {
-            console.log(error);
-          }
-        // this.resetState()
+        this.$store.dispatch("setAlumno", registro)
+        // try {
+        //     await axios.post(`https://62df4289976ae7460be99a23.mockapi.io/alumnos`, registro);
+        //   }
+        //   catch (error) {
+        //     console.log(error);
+        //   }
+        this.resetState()
       }
       
     },
