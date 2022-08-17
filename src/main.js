@@ -1,15 +1,13 @@
-import Vue from 'vue'
+
+import {createApp} from 'vue'
 import App from './App.vue'
 import store from './store'
-import VueForm from 'vue-form'
 import router from './router'
+import vueForm from 'vue-form'
 
 
-Vue.config.productionTip = false
-Vue.use(VueForm)
-
-new Vue({
-  store,
-  router,
-  render: h => h(App),
-}).$mount('#app')
+createApp(App)
+.use(router)
+.use(store)
+.use(vueForm)
+.mount('#app')

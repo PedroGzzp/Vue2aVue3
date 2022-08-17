@@ -1,9 +1,12 @@
-import Vuex from 'vuex';
-import Vue from 'vue';
+// import Vuex from 'vuex';
+// import Vue from 'vue';
 
-Vue.use(Vuex)
+// Vue.use(Vuex)
+import {createStore} from 'vuex'
+
 import axios from 'axios'
-export default new Vuex.Store({
+// export default new Vuex.Store({
+export default new createStore({
     state:{
         listaAlumnos: []
     },
